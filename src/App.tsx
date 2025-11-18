@@ -6,8 +6,6 @@ import "./App.css";
 function App() {
   const [count, setCount] = useState(0);
 
-// AI! improve color scheme so that it is overall darker  
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />

@@ -1,29 +1,6 @@
+import type { TreeNode, BuildRepoTreeOptions } from "@/types/treeDiagram";
 import type { GitHubUser, GitHubRepoNode } from "../../../types/github";
 
-// react-d3-tree expects this shape:
-export interface TreeNode {
-  name: string;
-  attributes?: Record<string, string | number | boolean>;
-  children?: TreeNode[];
-}
-
-interface BuildRepoTreeOptions {
-  sortLanguagesBy?: "name" | "repoCount";
-  sortReposBy?: "name" | "stars";
-}
-
-/**
- * Build hierarchical tree data:
- *
- * User
- *  ├─ Language A
- *  │    ├─ Repo 1
- *  │    └─ Repo 2
- *  └─ Language B
- *       └─ Repo 3
- *
- * All sorting/reordering is centralized here.
- */
 export function buildRepoTree(
   user: GitHubUser,
   repos: GitHubRepoNode[],
@@ -70,8 +47,10 @@ export function buildRepoTree(
         attributes: {
           type: "repo",
           repoId: repo.id,
+          url: repo.url,
           stars: repo.stargazerCount,
           updatedAt: repo.updatedAt,
+          primaryLanguage: repo.primaryLanguage?.name ?? "",
         },
       }));
 
@@ -79,7 +58,7 @@ export function buildRepoTree(
         name: language,
         attributes: {
           type: "language",
-          language,
+          languageName: language,
           repoCount: sortedRepos.length,
         },
         children: repoChildren,
@@ -93,6 +72,8 @@ export function buildRepoTree(
     attributes: {
       type: "user",
       displayName: user.name ?? user.login,
+      avatarUrl: user.avatarUrl,
+      profileUrl: user.url,
       totalRepos: user.repositories.totalCount,
     },
     children: languageNodes,

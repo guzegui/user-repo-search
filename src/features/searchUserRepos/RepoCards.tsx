@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 import { RepoListItem } from "./RepoListItem";
 import type { GitHubRepoNode } from "../../types/github";
 
@@ -17,7 +18,9 @@ export function RepoCards({ repos }: RepoCardsProps) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {repos.map((repo) => (
-        <RepoListItem key={repo.id} repo={repo} />
+        <Card key={repo.id}>
+          <RepoListItem repo={repo} />
+        </Card>
       ))}
     </div>
   );

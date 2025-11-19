@@ -9,7 +9,7 @@ import { SearchPage } from "./pages/SearchPage";
  *
  * @returns The main application structure with routed pages.
  */
-function App(): React.JSX.Element {
+function App(): JSX.Element {
   const location = useLocation();
 
   return (

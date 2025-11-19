@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
  *
  * @returns The home page with a search input and button.
  */
-export function HomePage(): React.JSX.Element {
+export function HomePage(): JSX.Element {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 

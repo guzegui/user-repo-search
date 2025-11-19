@@ -20,10 +20,10 @@ function App(): JSX.Element {
           element={
             <motion.div
               key={location.pathname}
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -100 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 1.02, filter: "blur(4px)" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               style={{ position: "absolute", width: "100%", height: "100%" }}
             >
               <HomePage />

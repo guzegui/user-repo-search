@@ -2,7 +2,19 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+/**
+ * A standardized input component with styling and focus/error states.
+ *
+ * @param props - Props for the Input component.
+ * @param props.className - Additional class names to apply.
+ * @param props.type - The type of the input (e.g., "text", "email", "password").
+ * @returns The rendered input field.
+ */
+function Input({
+  className,
+  type,
+  ...props
+}: React.ComponentProps<"input">): JSX.Element {
   return (
     <input
       type={type}

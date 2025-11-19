@@ -7,11 +7,19 @@ import {
 } from "@/components/ui/card";
 import type { GitHubRepoNode } from "../../types/github";
 
+/** Props for the RepoListItem component. */
 interface RepoListItemProps {
+  /** The GitHub repository node to display. */
   repo: GitHubRepoNode;
 }
 
-export function RepoListItem({ repo }: RepoListItemProps) {
+/**
+ * Displays a single GitHub repository as a card.
+ *
+ * @param props - The props for the component.
+ * @returns A card displaying repository information.
+ */
+export function RepoListItem({ repo }: RepoListItemProps): JSX.Element {
   const updatedDate = new Date(repo.updatedAt).toLocaleDateString();
   const languageName = repo.primaryLanguage?.name ?? null;
   const languageColor = repo.primaryLanguage?.color ?? "#e2e8f0"; // slate-200-ish

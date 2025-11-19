@@ -8,21 +8,34 @@ import {
 } from "@/components/ui/select";
 import type { GitHubRepoNode } from "../../types/github";
 
+/** Props for the RepoFilters component. */
 interface RepoFiltersProps {
+  /** The full list of repositories to extract available languages from. */
   repos: GitHubRepoNode[];
+  /** The current filter string for repository names. */
   nameFilter: string;
+  /** The current filter string for primary language, or "all". */
   languageFilter: string | "all";
+  /** Callback function to update the name filter. */
   onNameFilterChange: (value: string) => void;
+  /** Callback function to update the language filter. */
   onLanguageFilterChange: (value: string | "all") => void;
 }
 
+/**
+ * Provides UI controls for filtering a list of GitHub repositories by name and primary language.
+ *
+ * @param props - The props for the component.
+ * @returns A set of input fields and a select dropdown for repository filtering.
+ */
 export function RepoFilters({
   repos,
   nameFilter,
   languageFilter,
   onNameFilterChange,
   onLanguageFilterChange,
-}: RepoFiltersProps) {
+}: RepoFiltersProps): JSX.Element {
+  // Extract unique languages from the provided repositories
   const languages = Array.from(
     new Set(
       repos

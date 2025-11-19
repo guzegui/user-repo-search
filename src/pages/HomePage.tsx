@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export function HomePage() {
+/**
+ * The home page component, providing a user interface to search for GitHub repositories by username.
+ * Users can input a username and submit the form to navigate to the search results page.
+ *
+ * @returns The home page with a search input and button.
+ */
+export function HomePage(): JSX.Element {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 

@@ -2,7 +2,16 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * A flexible content container, often used to group related information.
+ *
+ * @param props - Props for the Card component.
+ * @param props.className - Additional class names to apply.
+ */
+function Card({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card"
@@ -15,7 +24,16 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * The header section of a Card.
+ *
+ * @param props - Props for the CardHeader component.
+ * @param props.className - Additional class names to apply.
+ */
+function CardHeader({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card-header"
@@ -28,7 +46,16 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * The title of a Card, typically used within `CardHeader`.
+ *
+ * @param props - Props for the CardTitle component.
+ * @param props.className - Additional class names to apply.
+ */
+function CardTitle({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card-title"
@@ -38,7 +65,16 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * A descriptive text for a Card, typically used within `CardHeader`.
+ *
+ * @param props - Props for the CardDescription component.
+ * @param props.className - Additional class names to apply.
+ */
+function CardDescription({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card-description"
@@ -48,7 +84,16 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * A container for actions related to the Card, often placed in the header.
+ *
+ * @param props - Props for the CardAction component.
+ * @param props.className - Additional class names to apply.
+ */
+function CardAction({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card-action"
@@ -61,7 +106,16 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * The main content area of a Card.
+ *
+ * @param props - Props for the CardContent component.
+ * @param props.className - Additional class names to apply.
+ */
+function CardContent({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card-content"
@@ -71,7 +125,16 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * The footer section of a Card.
+ *
+ * @param props - Props for the CardFooter component.
+ * @param props.className - Additional class names to apply.
+ */
+function CardFooter({
+  className,
+  ...props
+}: React.ComponentProps<"div">): JSX.Element {
   return (
     <div
       data-slot="card-footer"

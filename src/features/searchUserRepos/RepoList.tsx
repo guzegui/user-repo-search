@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { RepoListItem } from "./RepoListItem";
 import type { GitHubRepoNode } from "../../types/github";
 
@@ -15,10 +16,33 @@ interface RepoListProps {
  */
 export function RepoList({ repos }: RepoListProps): React.JSX.Element {
   return (
-    <div className="space-y-3">
+    <motion.div
+      className="space-y-3"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 1 },
+        visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.06, delayChildren: 0.05 },
+        },
+      }}
+    >
       {repos.map((repo) => (
-        <RepoListItem key={repo.id} repo={repo} />
+        <motion.div
+          key={repo.id}
+          variants={{
+            hidden: { opacity: 0, x: -16 },
+            visible: {
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.3, ease: "easeOut" },
+            },
+          }}
+        >
+          <RepoListItem repo={repo} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

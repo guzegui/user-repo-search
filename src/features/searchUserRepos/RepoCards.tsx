@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { RepoListItem } from "./RepoListItem";
 import type { GitHubRepoNode } from "../../types/github";
 
@@ -24,10 +25,34 @@ export function RepoCards({ repos }: RepoCardsProps): React.JSX.Element {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <motion.div
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 1 },
+        visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+        },
+      }}
+    >
       {repos.map((repo) => (
-        <RepoListItem key={repo.id} repo={repo} />
+        <motion.div
+          key={repo.id}
+          variants={{
+            hidden: { opacity: 0, y: 12, scale: 0.97 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              transition: { duration: 0.35, ease: "easeOut" },
+            },
+          }}
+        >
+          <RepoListItem repo={repo} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

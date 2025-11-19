@@ -1,14 +1,13 @@
-import { UserReposView } from "./features/searchUserRepos/UserReposView";
-import { Header } from "./components/layout/Header";
+import { Routes, Route } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+import { SearchPage } from "./pages/SearchPage";
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <Header />
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        <UserReposView />
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/search/:username" element={<SearchPage />} />
+    </Routes>
   );
 }
 

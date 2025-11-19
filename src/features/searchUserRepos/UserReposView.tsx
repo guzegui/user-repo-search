@@ -8,13 +8,25 @@ import { Button } from "@/components/ui/button";
 import type { GitHubRepoNode } from "../../types/github";
 import { RepoCards } from "./RepoCards";
 
+/** Defines the possible view modes for displaying repositories. */
 type ViewMode = "tree" | "list" | "cards";
 
+/** Props for the UserReposView component. */
 interface UserReposViewProps {
+  /** The initial GitHub username to search for when the component mounts. */
   initialUsername: string;
 }
 
-export function UserReposView({ initialUsername }: UserReposViewProps) {
+/**
+ * A comprehensive component to display a GitHub user's repositories.
+ * It includes filtering, multiple view modes (cards, list, tree), and error/loading states.
+ *
+ * @param props - The props for the component.
+ * @returns The user repository view.
+ */
+export function UserReposView({
+  initialUsername,
+}: UserReposViewProps): React.JSX.Element {
   const { user, repos, loading, error, searchUser } = useUserRepos();
   const [hasSearched, setHasSearched] = useState(false);
 

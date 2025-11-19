@@ -3,7 +3,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { HomePage } from "./pages/HomePage";
 import { SearchPage } from "./pages/SearchPage";
 
-function App() {
+/**
+ * The main application component responsible for routing and page transitions.
+ * It uses `react-router-dom` for navigation and `framer-motion` for page animations.
+ *
+ * @returns The main application structure with routed pages.
+ */
+function App(): React.JSX.Element {
   const location = useLocation();
 
   return (

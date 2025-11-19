@@ -1,6 +1,18 @@
 import type { TreeNode, BuildRepoTreeOptions } from "@/types/treeDiagram";
 import type { GitHubUser, GitHubRepoNode } from "../../../types/github";
 
+/**
+ * Builds a hierarchical tree structure of a user's GitHub repositories,
+ * grouped by primary language, suitable for use with `react-d3-tree`.
+ *
+ * The tree structure is: User (root) -> Language (branch) -> Repository (leaf).
+ *
+ * @function
+ * @param user - The GitHub user object to be the root of the tree.
+ * @param repos - An array of GitHub repository nodes to include in the tree.
+ * @param options - Optional configuration for sorting languages and repositories.
+ * @returns The root node of the constructed tree.
+ */
 export function buildRepoTree(
   user: GitHubUser,
   repos: GitHubRepoNode[],

@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# GitHub Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application that allows users to search for GitHub users and view their public repositories. It provides different visualization modes for the repositories, including a list, cards, and a hierarchical tree diagram grouped by programming language. The application interacts with the GitHub GraphQL API to fetch user and repository data.
 
-Currently, two official plugins are available:
+## How to Run the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To get this project up and running on your local machine, follow these steps:
 
-## React Compiler
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd <your-repository-name>
+    ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Expanding the ESLint configuration
+3.  **Set up GitHub Personal Access Token (PAT):**
+    The application uses the GitHub GraphQL API, which requires authentication. You need to create a `.env` file in the root of the project and add your GitHub Personal Access Token:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    ```
+    VITE_GITHUB_PAT=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN
+    ```
+    You can generate a PAT from your GitHub Developer Settings (ensure it has `public_repo` scope for public repositories).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+4.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    This will start the Vite development server, usually accessible at `http://localhost:5173`. The application will automatically open in your browser.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## How to Run the Test Suite
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The project uses Vitest for its testing suite. To run the tests, use the following command:
+
+```bash
+npm test
 ```
+This command will execute all tests and report the results in your terminal.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Future Improvements
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*   Implement pagination for repositories to handle users with a large number of repos.
+*   Add more detailed repository information (e.g., issues, pull requests).
+*   Enhance filtering and sorting options for repositories.
+*   Improve error handling and user feedback in the UI.
+*   Add support for light/dark theme toggling.
+*   Allow searching for organizations in addition to individual users.
+*   Implement repository search functionality within a user's profile.

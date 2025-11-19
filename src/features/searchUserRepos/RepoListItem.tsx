@@ -19,7 +19,7 @@ interface RepoListItemProps {
  * @param props - The props for the component.
  * @returns A card displaying repository information.
  */
-export function RepoListItem({ repo }: RepoListItemProps): JSX.Element {
+export function RepoListItem({ repo }: RepoListItemProps): React.JSX.Element {
   const updatedDate = new Date(repo.updatedAt).toLocaleDateString();
   const languageName = repo.primaryLanguage?.name ?? null;
   const languageColor = repo.primaryLanguage?.color ?? "#e2e8f0"; // slate-200-ish

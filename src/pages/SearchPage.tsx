@@ -14,7 +14,7 @@ interface SearchPageParams extends Record<string, string | undefined> {
  *
  * @returns The search page with a header and user repository view.
  */
-export function SearchPage(): JSX.Element {
+export function SearchPage(): React.JSX.Element {
   const { username } = useParams<SearchPageParams>();
 
   if (!username) {

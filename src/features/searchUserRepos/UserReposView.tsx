@@ -26,7 +26,7 @@ interface UserReposViewProps {
  */
 export function UserReposView({
   initialUsername,
-}: UserReposViewProps): JSX.Element {
+}: UserReposViewProps): React.JSX.Element {
   const { user, repos, loading, error, searchUser } = useUserRepos();
   const [hasSearched, setHasSearched] = useState(false);
 

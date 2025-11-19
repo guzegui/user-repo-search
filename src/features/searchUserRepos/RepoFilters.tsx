@@ -34,7 +34,7 @@ export function RepoFilters({
   languageFilter,
   onNameFilterChange,
   onLanguageFilterChange,
-}: RepoFiltersProps): JSX.Element {
+}: RepoFiltersProps): React.JSX.Element {
   // Extract unique languages from the provided repositories
   const languages = Array.from(
     new Set(

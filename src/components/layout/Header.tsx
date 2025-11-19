@@ -4,7 +4,7 @@
  *
  * @returns The header element.
  */
-export function Header(): JSX.Element {
+export function Header(): React.JSX.Element {
   return (
     <header className="border-b bg-white">
       <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">

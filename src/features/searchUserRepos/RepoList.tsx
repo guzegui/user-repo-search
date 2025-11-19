@@ -13,7 +13,7 @@ interface RepoListProps {
  * @param props - The props for the component.
  * @returns A div containing a list of repository cards.
  */
-export function RepoList({ repos }: RepoListProps): JSX.Element {
+export function RepoList({ repos }: RepoListProps): React.JSX.Element {
   return (
     <div className="space-y-3">
       {repos.map((repo) => (

@@ -14,7 +14,7 @@ interface RepoCardsProps {
  * @param props - The props for the component.
  * @returns A grid of repository cards or a message.
  */
-export function RepoCards({ repos }: RepoCardsProps): JSX.Element {
+export function RepoCards({ repos }: RepoCardsProps): React.JSX.Element {
   if (!repos.length) {
     return (
       <div className="text-sm text-slate-500">

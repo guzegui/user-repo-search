@@ -1,13 +1,46 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { HomePage } from "./pages/HomePage";
 import { SearchPage } from "./pages/SearchPage";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/search/:username" element={<SearchPage />} />
-    </Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location}>
+        <Route
+          path="/"
+          element={
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -100 }}
+              transition={{ duration: 0.3 }}
+              style={{ position: "absolute", width: "100%", height: "100%" }}
+            >
+              <HomePage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/search/:username"
+          element={
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -100 }}
+              transition={{ duration: 0.3 }}
+              style={{ position: "absolute", width: "100%", height: "100%" }}
+            >
+              <SearchPage />
+            </motion.div>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
   );
 }
 

@@ -105,7 +105,6 @@
         ],
         "tags": [
             "framework",
-            "html",
             "javascript",
             "js",
             "web"
@@ -1410,7 +1409,6 @@
         "tags": [
             "css",
             "framework",
-            "html",
             "javascript",
             "library"
         ],
@@ -2748,7 +2746,6 @@
         "tags": [
             "css",
             "framework",
-            "html",
             "javascript",
             "library"
         ],
@@ -5399,6 +5396,7 @@
             "hypertextmarkdownlanguage5"
         ],
         "tags": [
+            "html",
             "programming",
             "language"
         ],
@@ -5425,7 +5423,6 @@
         "tags": [
             "framework",
             "web",
-            "html",
             "ui"
         ],
         "versions": {
@@ -5457,7 +5454,6 @@
             "ssg",
             "static-site-generator",
             "go",
-            "html",
             "css"
         ],
         "versions": {
@@ -9410,7 +9406,6 @@
         "tags": [
             "animation",
             "graphics",
-            "html",
             "javascript",
             "library",
             "visualization",
@@ -10163,7 +10158,6 @@
         "tags": [
             "browser",
             "python",
-            "html",
             "framework"
         ],
         "versions": {
@@ -12864,7 +12858,6 @@
         "altnames": [],
         "tags": [
             "engine",
-            "html",
             "java",
             "server"
         ],

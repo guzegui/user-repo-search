@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { fetchUserReposGraphql } from "@/api/githubGraphqlClient";
 import type {
   GitHubRepoNode,
@@ -24,7 +24,7 @@ export function useUserRepos() {
     error: null,
   });
 
-  const searchUser = async (login: string) => {
+  const searchUser = useCallback(async (login: string) => {
     if (!login.trim()) return;
 
     setState((prev) => ({
@@ -52,7 +52,7 @@ export function useUserRepos() {
         error: (err as Error).message,
       });
     }
-  };
+  }, [setState]); // setState is stable, so searchUser will only be created once
 
   return {
     user: state.user,

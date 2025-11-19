@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { UserSearchForm } from "./UserSearchForm";
+import { useState, useEffect } from "react";
 import { RepoFilters } from "./RepoFilters";
 import { useUserRepos } from "./hooks/userUserRepos";
 import { filterRepos } from "./utils/filterRepos";
@@ -11,28 +10,34 @@ import { RepoCards } from "./RepoCards";
 
 type ViewMode = "tree" | "list" | "cards";
 
-export function UserReposView() {
+interface UserReposViewProps {
+  initialUsername: string;
+}
+
+export function UserReposView({ initialUsername }: UserReposViewProps) {
   const { user, repos, loading, error, searchUser } = useUserRepos();
   const [hasSearched, setHasSearched] = useState(false);
 
   const [nameFilter, setNameFilter] = useState("");
   const [languageFilter, setLanguageFilter] = useState<"all" | string>("all");
-  const [viewMode, setViewMode] = useState<ViewMode>("cards"); // Default to cards view
+  const [viewMode, setViewMode] = useState<ViewMode>("cards");
   const [selectedRepo, setSelectedRepo] = useState<GitHubRepoNode | null>(null);
 
-  const handleSearch = (username: string) => {
-    searchUser(username);
-    setHasSearched(true);
-    setSelectedRepo(null);
-  };
+  useEffect(() => {
+    if (initialUsername) {
+      searchUser(initialUsername);
+      setHasSearched(true);
+      setSelectedRepo(null);
+      setNameFilter("");
+      setLanguageFilter("all");
+    }
+  }, [initialUsername, searchUser]);
 
   const filteredRepos = filterRepos(repos, nameFilter, languageFilter);
-  const showContent = !loading && !error && repos.length > 0;
+  const showContent = !loading && !error && hasSearched && repos.length > 0;
 
   return (
     <section className="space-y-6">
-      <UserSearchForm onSearch={handleSearch} />
-
       {error && (
         <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
           {error}
@@ -40,7 +45,7 @@ export function UserReposView() {
       )}
 
       {loading && (
-        <div className="text-sm text-slate-500">Loading repositories…</div>
+        <div className="text-sm text-slate-500">Loading repositories for {initialUsername}…</div>
       )}
 
       {!loading && !error && !hasSearched && (

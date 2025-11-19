@@ -7,8 +7,9 @@ import { RepoTreeDiagram } from "./RepoTreeDiagram";
 import { RepoList } from "./RepoList";
 import { Button } from "@/components/ui/button";
 import type { GitHubRepoNode } from "../../types/github";
+import { RepoCards } from "./RepoCards";
 
-type ViewMode = "tree" | "list";
+type ViewMode = "tree" | "list" | "cards";
 
 export function UserReposView() {
   const { user, repos, loading, error, searchUser } = useUserRepos();
@@ -16,7 +17,7 @@ export function UserReposView() {
 
   const [nameFilter, setNameFilter] = useState("");
   const [languageFilter, setLanguageFilter] = useState<"all" | string>("all");
-  const [viewMode, setViewMode] = useState<ViewMode>("tree");
+  const [viewMode, setViewMode] = useState<ViewMode>("cards"); // Default to cards view
   const [selectedRepo, setSelectedRepo] = useState<GitHubRepoNode | null>(null);
 
   const handleSearch = (username: string) => {
@@ -94,10 +95,10 @@ export function UserReposView() {
               <Button
                 type="button"
                 size="sm"
-                variant={viewMode === "tree" ? "default" : "outline"}
-                onClick={() => setViewMode("tree")}
+                variant={viewMode === "cards" ? "default" : "outline"}
+                onClick={() => setViewMode("cards")}
               >
-                Tree view
+                Cards view
               </Button>
               <Button
                 type="button"
@@ -106,6 +107,14 @@ export function UserReposView() {
                 onClick={() => setViewMode("list")}
               >
                 List view
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                variant={viewMode === "tree" ? "default" : "outline"}
+                onClick={() => setViewMode("tree")}
+              >
+                Tree view
               </Button>
             </div>
           </div>
@@ -116,11 +125,13 @@ export function UserReposView() {
               repos={filteredRepos}
               onSelectRepo={setSelectedRepo}
             />
-          ) : (
+          ) : viewMode === "list" ? (
             <RepoList repos={filteredRepos} />
+          ) : (
+            <RepoCards repos={filteredRepos} />
           )}
 
-          {/* Details panel when a repo is selected from the tree */}
+          {/* Details panel when a repo is selected from the tree (only shown in tree view) */}
           {viewMode === "tree" && selectedRepo && (
             <div className="mt-4 rounded-lg border bg-white p-4 shadow-sm">
               <div className="flex items-center justify-between gap-2">

@@ -28,6 +28,9 @@ export function RepoCards({
   loadingMore = false,
   onLoadMore,
 }: RepoCardsProps): React.JSX.Element {
+  const gridKey =
+    repos.length > 0 ? repos.map((repo) => repo.id).join("-") : "empty";
+
   const loadMoreButton =
     canLoadMore && onLoadMore ? (
       <div className="text-center">
@@ -56,6 +59,7 @@ export function RepoCards({
   return (
     <div className="space-y-4">
       <motion.div
+        key={gridKey}
         className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         initial="hidden"
         animate="visible"

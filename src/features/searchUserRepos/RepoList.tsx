@@ -27,9 +27,13 @@ export function RepoList({
   loadingMore = false,
   onLoadMore,
 }: RepoListProps): React.JSX.Element {
+  const listKey =
+    repos.length > 0 ? repos.map((repo) => repo.id).join("-") : "empty";
+
   return (
     <div className="space-y-4">
       <motion.div
+        key={listKey}
         className="space-y-3"
         initial="hidden"
         animate="visible"

@@ -76,6 +76,7 @@ export function RepoList({
             animate={{ opacity: 1 }}
           >
             <Button
+              data-testid="load-more-button"
               type="button"
               variant="outline"
               onClick={onLoadMore}

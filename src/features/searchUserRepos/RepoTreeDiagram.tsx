@@ -222,7 +222,7 @@ export function RepoTreeDiagram({
           onClick={onLoadMore}
           disabled={loadingMore}
         >
-          {loadingMore ? "Loading more..." : "Load 20 more repositories"}
+          {loadingMore ? "Loading more..." : "Load more repositories"}
         </Button>
       </div>
     ) : null;

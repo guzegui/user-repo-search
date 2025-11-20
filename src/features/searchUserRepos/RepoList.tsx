@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { RepoListItem } from "./RepoListItem";
 import type { GitHubRepoNode } from "../../types/github";
@@ -27,51 +28,62 @@ export function RepoList({
   loadingMore = false,
   onLoadMore,
 }: RepoListProps): React.JSX.Element {
-  const listKey =
-    repos.length > 0 ? repos.map((repo) => repo.id).join("-") : "empty";
+  const previousRepoIdsRef = useRef<Set<string>>(new Set());
+  const previousRepoIds = previousRepoIdsRef.current;
+  const isInitialMount = previousRepoIds.size === 0;
+
+  useEffect(() => {
+    previousRepoIdsRef.current = new Set(repos.map((repo) => repo.id));
+  }, [repos]);
 
   return (
     <div className="space-y-4">
-      <motion.div
-        key={listKey}
-        className="space-y-3"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 1 },
-          visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.06, delayChildren: 0.05 },
-          },
-        }}
-      >
-        {repos.map((repo) => (
-          <motion.div
-            key={repo.id}
-            variants={{
-              hidden: { opacity: 0, x: -16 },
-              visible: {
-                opacity: 1,
-                x: 0,
-                transition: { duration: 0.3, ease: "easeOut" },
-              },
-            }}
-          >
-            <RepoListItem repo={repo} />
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className="space-y-3">
+        {repos.map((repo, index) => {
+          const isNewRepo = !previousRepoIds.has(repo.id);
+
+          const delay = isInitialMount
+            ? index * 0.06
+            : isNewRepo
+              ? 0.05
+              : 0;
+
+          return (
+            <motion.div
+              key={repo.id}
+              initial={
+                isInitialMount || isNewRepo
+                  ? { opacity: 0, x: -16 }
+                  : false
+              }
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: "easeOut",
+                delay,
+              }}
+            >
+              <RepoListItem repo={repo} />
+            </motion.div>
+          );
+        })}
+      </div>
 
       {canLoadMore && onLoadMore && (
         <div className="text-center">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={onLoadMore}
-            disabled={loadingMore}
+          <motion.div
+            initial={false}
+            animate={{ opacity: 1 }}
           >
-            {loadingMore ? "Loading more..." : "Load 20 more repositories"}
-          </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onLoadMore}
+              disabled={loadingMore}
+            >
+              {loadingMore ? "Loading more..." : "Load more repositories"}
+            </Button>
+          </motion.div>
         </div>
       )}
     </div>

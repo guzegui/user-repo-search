@@ -9,6 +9,12 @@ export interface RepoTreeDiagramProps {
   repos: GitHubRepoNode[];
   /** Optional callback function triggered when a repository node is selected. */
   onSelectRepo?: (repo: GitHubRepoNode | null) => void;
+  /** Indicates if additional repositories are available to fetch. */
+  canLoadMore?: boolean;
+  /** Indicates if the "load more" action is currently running. */
+  loadingMore?: boolean;
+  /** Callback fired when the user requests another page of repositories. */
+  onLoadMore?: () => void;
 }
 
 /**

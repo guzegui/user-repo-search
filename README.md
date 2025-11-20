@@ -2,6 +2,8 @@
 
 This project is a React application that allows users to search for GitHub users and view their public repositories. It provides different visualization modes for the repositories, including a list, cards, and a hierarchical tree diagram grouped by programming language. The application interacts with the GitHub GraphQL API to fetch user and repository data.
 
+You can see a live demo of the application [here](https://user-repo-search.pages.dev/).
+
 ## How to Run the Project
 
 To get this project up and running on your local machine, follow these steps:
@@ -23,7 +25,10 @@ To get this project up and running on your local machine, follow these steps:
     ```
     VITE_GITHUB_PAT=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN
     ```
+    
     You can generate a PAT from your GitHub Developer Settings (ensure it has `public_repo` scope for public repositories).
+
+    For more information, refer to the [GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 4.  **Start the development server:**
     ```bash
@@ -38,14 +43,13 @@ The project uses Vitest for its testing suite. To run the tests, use the followi
 ```bash
 npm test
 ```
-This command will execute all tests and report the results in your terminal.
+This command will execute all tests (Vitest) and report the results in your terminal.
 
 ## Future Improvements
 
 *   Implement pagination for repositories to handle users with a large number of repos.
-*   Add more detailed repository information (e.g., issues, pull requests).
+*   Add auto-complete and suggestions (accounting for debouncing and caching).
 *   Enhance filtering and sorting options for repositories.
+*   Add other GraphQL queries (i.e. search by repo, searching for organizations, etc.).
 *   Improve error handling and user feedback in the UI.
 *   Add support for light/dark theme toggling.
-*   Allow searching for organizations in addition to individual users.
-*   Implement repository search functionality within a user's profile.

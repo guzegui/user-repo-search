@@ -27,7 +27,16 @@ interface UserReposViewProps {
 export function UserReposView({
   initialUsername,
 }: UserReposViewProps): React.JSX.Element {
-  const { user, repos, loading, error, searchUser } = useUserRepos();
+  const {
+    user,
+    repos,
+    pageInfo,
+    loading,
+    loadingMore,
+    error,
+    searchUser,
+    loadMore,
+  } = useUserRepos();
   const [hasSearched, setHasSearched] = useState(false);
 
   const [nameFilter, setNameFilter] = useState("");
@@ -47,6 +56,7 @@ export function UserReposView({
 
   const filteredRepos = filterRepos(repos, nameFilter, languageFilter);
   const showContent = !loading && !error && hasSearched && repos.length > 0;
+  const canLoadMore = Boolean(pageInfo?.hasNextPage);
 
   return (
     <section className="space-y-6">
@@ -141,11 +151,24 @@ export function UserReposView({
               user={user}
               repos={filteredRepos}
               onSelectRepo={setSelectedRepo}
+              canLoadMore={canLoadMore}
+              loadingMore={loadingMore}
+              onLoadMore={loadMore}
             />
           ) : viewMode === "list" ? (
-            <RepoList repos={filteredRepos} />
+            <RepoList
+              repos={filteredRepos}
+              canLoadMore={canLoadMore}
+              loadingMore={loadingMore}
+              onLoadMore={loadMore}
+            />
           ) : (
-            <RepoCards repos={filteredRepos} />
+            <RepoCards
+              repos={filteredRepos}
+              canLoadMore={canLoadMore}
+              loadingMore={loadingMore}
+              onLoadMore={loadMore}
+            />
           )}
 
           {/* Details panel when a repo is selected from the tree (only shown in tree view) */}

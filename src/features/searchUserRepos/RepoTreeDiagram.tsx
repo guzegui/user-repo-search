@@ -8,9 +8,12 @@ import type {
   TreeNode,
 } from "@/types/treeDiagram";
 import { getDeviconForLanguage } from "@/utils/getDevIcon";
+import { Button } from "@/components/ui/button";
 
 /**
- * Horizontal tree:
+ * Renders a horizontal repository tree grouped by language with optional pagination controls.
+ *
+ * Layout reference:
  *
  *   [ user ]
  *      ├─ [ language ]
@@ -22,6 +25,9 @@ export function RepoTreeDiagram({
   user,
   repos,
   onSelectRepo,
+  canLoadMore = false,
+  loadingMore = false,
+  onLoadMore,
 }: RepoTreeDiagramProps) {
   const [translate, setTranslate] = useState<{ x: number; y: number }>({
     x: 0,
@@ -207,32 +213,52 @@ export function RepoTreeDiagram({
     );
   };
 
+  const loadMoreButton =
+    canLoadMore && onLoadMore ? (
+      <div className="text-center">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={onLoadMore}
+          disabled={loadingMore}
+        >
+          {loadingMore ? "Loading more..." : "Load more repositories"}
+        </Button>
+      </div>
+    ) : null;
+
   if (!repos.length) {
     return (
-      <div className="text-sm text-slate-500">
-        No repositories match the current filters.
+      <div className="space-y-3">
+        <div className="text-sm text-slate-500">
+          No repositories match the current filters.
+        </div>
+        {loadMoreButton}
       </div>
     );
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="h-[400px] w-full overflow-auto rounded-lg border bg-white"
-    >
-      <Tree
-        data={treeData}
-        orientation="horizontal"
-        translate={translate}
-        zoomable={true}
-        collapsible={false} // we don't want clicks to collapse branches
-        pathFunc="elbow"
-        rootNodeClassName="rd3t-node rd3t-node--root"
-        branchNodeClassName="rd3t-node rd3t-node--branch"
-        leafNodeClassName="rd3t-node rd3t-node--leaf"
-        onNodeClick={handleNodeClick}
-        renderCustomNodeElement={renderNode}
-      />
+    <div className="space-y-4">
+      <div
+        ref={containerRef}
+        className="h-[400px] w-full overflow-auto rounded-lg border bg-white"
+      >
+        <Tree
+          data={treeData}
+          orientation="horizontal"
+          translate={translate}
+          zoomable={true}
+          collapsible={false} // we don't want clicks to collapse branches
+          pathFunc="elbow"
+          rootNodeClassName="rd3t-node rd3t-node--root"
+          branchNodeClassName="rd3t-node rd3t-node--branch"
+          leafNodeClassName="rd3t-node rd3t-node--leaf"
+          onNodeClick={handleNodeClick}
+          renderCustomNodeElement={renderNode}
+        />
+      </div>
+      {loadMoreButton}
     </div>
   );
 }

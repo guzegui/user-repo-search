@@ -48,7 +48,6 @@ This command will execute all tests (Vitest) and report the results in your term
 ## Future Improvements
 
 *   Implement pagination for repositories to handle users with a large number of repos.
-*   Add auto-complete and suggestions (accounting for debouncing and caching).
 *   Enhance filtering and sorting options for repositories.
 *   Add other GraphQL queries (i.e. search by repo, searching for organizations, etc.).
 *   Improve error handling and user feedback in the UI.

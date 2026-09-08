@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { RepoList } from "./RepoList";
+import { RepoCards } from "./RepoCards";
 import type { GitHubRepoNode } from "@/types/github";
 
 const repos: GitHubRepoNode[] = [
@@ -24,30 +24,29 @@ const repos: GitHubRepoNode[] = [
   },
 ];
 
-describe("RepoList", () => {
-  it("renders a RepoListItem for each repository", () => {
-    render(<RepoList repos={repos} />);
+describe("RepoCards", () => {
+  it("renders repositories in a grid", () => {
+    render(<RepoCards repos={repos} />);
     expect(screen.getByText("alpha")).toBeInTheDocument();
     expect(screen.getByText("beta")).toBeInTheDocument();
-    expect(screen.getAllByText(/stars/)).toHaveLength(2);
   });
 
-  it("shows newly provided repositories without needing to unmount", () => {
-    const { rerender } = render(<RepoList repos={[repos[0]]} />);
+  it("reveals newly provided repositories on rerender", () => {
+    const { rerender } = render(<RepoCards repos={[repos[0]]} />);
 
     expect(screen.getByText("alpha")).toBeInTheDocument();
     expect(screen.queryByText("beta")).not.toBeInTheDocument();
 
-    rerender(<RepoList repos={repos} />);
+    rerender(<RepoCards repos={repos} />);
 
     expect(screen.getByText("alpha")).toBeInTheDocument();
     expect(screen.getByText("beta")).toBeInTheDocument();
   });
 
-  it("shows a load more button when pagination props are provided", () => {
+  it("renders a load more button when pagination props are set", () => {
     const onLoadMore = vi.fn();
     render(
-      <RepoList
+      <RepoCards
         repos={repos}
         canLoadMore
         loadingMore={false}

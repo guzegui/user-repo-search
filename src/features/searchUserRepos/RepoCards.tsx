@@ -41,6 +41,7 @@ export function RepoCards({
     canLoadMore && onLoadMore ? (
       <div className="text-center">
         <Button
+          data-testid="load-more-button"
           type="button"
           variant="outline"
           onClick={onLoadMore}
